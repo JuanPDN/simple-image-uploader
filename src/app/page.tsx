@@ -1,7 +1,11 @@
+import DropArea from "@/components/dropArea";
+
 export default function Home() {
   return (
     <main>
-      <h1>Simple Image Uploader</h1>
+      <section className="w-full h-screen flex justify-center items-center">
+        <DropArea />
+      </section>
     </main>
   );
 }
