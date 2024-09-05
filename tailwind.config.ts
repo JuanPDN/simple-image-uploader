@@ -8,6 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        "loader": "loader 1.7s ease-in-out infinite",
+      },
+      keyframes: {
+        "loader": {
+          from: { right: "100%" },
+          to: { right: "-20%" },
+        }
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
