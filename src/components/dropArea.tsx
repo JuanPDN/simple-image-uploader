@@ -1,8 +1,8 @@
 import Image from "next/image"
 export default function DropArea() {
     return (
-        <div className="bg-FFFFFF max-w-[540px] w-full p-2 rounded-xl shadow-lg">
-            <div className=" flex flex-col items-center py-28 border border-E5E7EB border-dashed rounded-lg">
+        <div className="bg-FFFFFF dark:bg-212936 max-w-[540px] w-full p-2 rounded-xl shadow-lg">
+            <div className=" flex flex-col items-center py-28 border border-E5E7EB dark:border-4D5562 border-dashed rounded-lg">
                 <Image
                     src="/exit.svg"
                     alt="logo"

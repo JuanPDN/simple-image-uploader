@@ -3,14 +3,15 @@ import Link from 'next/link'
 
 export default function Logo() {
     return (
-        <Link href="/">
+        <Link href="/" className='flex items-center gap-3 font-semibold text-sm'>
             <Image
-                src="/logo.svg"
+                src="/logo-small.svg"
                 alt="logo"
-                width={120}
+                width={22}
                 height={26}
                 priority
             />
+            <p>ImageUpload</p>
         </Link>
     )
 }
