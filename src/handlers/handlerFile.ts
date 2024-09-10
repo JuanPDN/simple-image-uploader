@@ -25,7 +25,6 @@ const fileReader = (file: File | null): string | null => {
     }
 
     try {
-        fileReader.readAsDataURL(file);
         fileReader.onload = () => {
             const formData = new FormData()
             formData.append("file", file)
