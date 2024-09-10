@@ -15,10 +15,7 @@ const fileReader = (file: File | null): string | null => {
     const maxFileSize = 2 * 1024 * 1024;
     const fileReader = new FileReader();
 
-    if (!file) {
-        return null;
-    }
-
+    if (!file) { return null }
     if (!file.type.includes("image")) {
         alert("Please select an image file");
         return null;
@@ -30,9 +27,12 @@ const fileReader = (file: File | null): string | null => {
     try {
         fileReader.readAsDataURL(file);
         fileReader.onload = () => {
-            const fileDataUrl = fileReader.result as string;
-            console.log(fileDataUrl);
-            return fileDataUrl;
+            const formData = new FormData()
+            formData.append("file", file)
+            fetch("http://localhost:3001/upload", {
+                method: "POST",
+                body: formData
+            })
         };
     } catch (error) {
         console.error("Error reading file:", error);
