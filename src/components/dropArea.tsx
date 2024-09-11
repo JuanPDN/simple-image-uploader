@@ -1,12 +1,13 @@
 'use client'
 
 import Image from "next/image"
-import { handlerFile } from "@/handlers/handlerFile"
-import handlerDragandDrop from "@/handlers/handlerDragandDrop"
 import { useEffect, useRef } from "react"
 
-export default function DropArea({ isLoading, setIsLoading }
-    : { isLoading: boolean, setIsLoading: React.Dispatch<React.SetStateAction<boolean>> }) {
+import { handlerFile } from "@/handlers/handlerFile"
+import handlerDragandDrop from "@/handlers/handlerDragandDrop"
+
+export default function DropArea({ setIsLoading }
+    : { setIsLoading: React.Dispatch<React.SetStateAction<boolean>> }) {
     const dropArea = useRef<HTMLDivElement | null>(null)
     const dragAndDrop = useRef<handlerDragandDrop | null>(null)
 
