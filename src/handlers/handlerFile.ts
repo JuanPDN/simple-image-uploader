@@ -33,7 +33,9 @@ const fileReader = (file: File | null): string | null => {
             fetch("http://localhost:3001/upload", {
                 method: "POST",
                 body: formData
-            })
+            }).then((response) => response.json())
+                .then((data) => window.location.href = `/${data.id}`)
+
         };
     } catch (error) {
         console.error("Error reading file:", error);
