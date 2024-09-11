@@ -11,7 +11,7 @@ export default function Home() {
     <main>
       <section className="w-full h-screen flex justify-center items-center dark:text-F9FAFBCC">
         {!isLoading
-          ? <DropArea isLoading={isLoading} setIsLoading={setIsLoading} />
+          ? <DropArea setIsLoading={setIsLoading} />
           : <Loader />}
       </section>
     </main>
