@@ -3,12 +3,12 @@ const handlerFile = (event: React.ChangeEvent<HTMLInputElement>,
     const selectedFiles = event.target.files;
 
     isLoading(true)
-    selectedFiles &&
-        setTimeout(() => {
+    try {
+        selectedFiles &&
             fileReader(selectedFiles[0]);
-            isLoading(false)
-        }, 2000)
-
+    } finally {
+        isLoading(false)
+    }
 };
 
 const fileReader = (file: File | null): string | null => {
@@ -25,9 +25,11 @@ const fileReader = (file: File | null): string | null => {
     }
 
     try {
+        fileReader.readAsDataURL(file);
         fileReader.onload = () => {
             const formData = new FormData()
             formData.append("file", file)
+
             fetch("http://localhost:3001/upload", {
                 method: "POST",
                 body: formData

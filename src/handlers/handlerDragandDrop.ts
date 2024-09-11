@@ -22,12 +22,12 @@ class handlerDragandDrop {
         e.preventDefault()
         this.dropArea!.classList.remove("opacity-50")
         const file = e.dataTransfer!.files[0];
-
         isLoading(true)
-        setTimeout(() => {
+        try {
             fileReader(file)
+        } finally {
             isLoading(false)
-        }, 2000)
+        }
     }
 
 }
