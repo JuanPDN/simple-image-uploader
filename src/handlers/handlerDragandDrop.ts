@@ -24,8 +24,9 @@ class handlerDragandDrop {
         const file = e.dataTransfer!.files[0];
         isLoading(true)
         try {
-            fileReader(file)
-        } finally {
+            fileReader(file, isLoading)
+        } catch (error) {
+            console.error("Error reading file:", error);
             isLoading(false)
         }
     }
