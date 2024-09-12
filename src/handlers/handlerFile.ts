@@ -5,31 +5,39 @@ const handlerFile = (event: React.ChangeEvent<HTMLInputElement>,
     isLoading(true)
     try {
         selectedFiles &&
-            fileReader(selectedFiles[0], isLoading);
+            uploadFile(selectedFiles[0], isLoading);
     } catch (error) {
         console.error("Error reading file:", error);
         isLoading(false)
     }
 };
 
-const fileReader = (file: File | null,
-    isLoading: React.Dispatch<React.SetStateAction<boolean>>): string | null => {
+const validationFile = (file: File,
+    isLoading: React.Dispatch<React.SetStateAction<boolean>>): boolean => {
+    const MAX_FILE_SIZE = 2 * 1024 * 1024;
+    if (!file) return false
 
-    const maxFileSize = 2 * 1024 * 1024;
-    const fileReader = new FileReader();
-
-    if (!file) { return null }
     if (!file.type.includes("image")) {
         alert("Please select an image file");
         isLoading(false)
-        return null;
-    } else if (file.size > maxFileSize) {
-        alert("Max file size is 2MB");
-        isLoading(false)
-        return null;
+        return false;
     }
 
+    if (file.size > MAX_FILE_SIZE) {
+        alert("Max file size is 2MB");
+        isLoading(false)
+        return false;
+    }
+    return true
+}
+
+const uploadFile = async (file: File,
+    isLoading: React.Dispatch<React.SetStateAction<boolean>>)
+    : Promise<void | null> => {
+
+    if (!validationFile(file, isLoading)) return
     try {
+        const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
         fileReader.onload = () => {
             const formData = new FormData()
@@ -38,20 +46,20 @@ const fileReader = (file: File | null,
             fetch("http://localhost:3001/upload", {
                 method: "POST",
                 body: formData
-            }).then((response) => response.json())
+            })
+                .then((response) => response.json())
                 .then((data) => {
                     isLoading(false)
                     window.location.href = `/${data.id}`
                 })
         };
+
     } catch (error) {
-        console.error("Error reading file:", error);
-        return null;
+        return console.error("Error reading file:", error);
     }
-    return null;
 }
 
 export {
     handlerFile,
-    fileReader
+    uploadFile
 }
