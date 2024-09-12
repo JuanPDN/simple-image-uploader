@@ -1,4 +1,4 @@
-import { fileReader } from "./handlerFile";
+import { uploadFile } from "./handlerFile";
 
 class handlerDragandDrop {
     constructor(private dropArea: HTMLElement | null) {
@@ -24,7 +24,7 @@ class handlerDragandDrop {
         const file = e.dataTransfer!.files[0];
         isLoading(true)
         try {
-            fileReader(file, isLoading)
+            uploadFile(file, isLoading)
         } catch (error) {
             console.error("Error reading file:", error);
             isLoading(false)
