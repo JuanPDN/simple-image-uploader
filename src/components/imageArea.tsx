@@ -22,6 +22,7 @@ export default async function ImageArea({ id }: { id: number }) {
                     alt={"not found"}
                     width={524}
                     height={322}
+                    unoptimized
                     priority
                 />
             }
