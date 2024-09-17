@@ -10,5 +10,5 @@ export const handleCopyLink = (event: React.MouseEvent<HTMLButtonElement>) => {
 
     setTimeout(() => {
         button.outerHTML = initialText;
-    }, 2500);
+    }, 1500);
 };
