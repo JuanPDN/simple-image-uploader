@@ -1,6 +1,7 @@
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 const baseURL = process.env.URL_SERVER
+
 const handlerFile = (event: React.ChangeEvent<HTMLInputElement>,
     isLoading: React.Dispatch<React.SetStateAction<boolean>>,
     router: AppRouterInstance) => {
@@ -47,6 +48,7 @@ const uploadFile = async (file: File,
 
     try {
         fileReader.onload = () => {
+
             const formData = new FormData()
             formData.append("file", file)
 
