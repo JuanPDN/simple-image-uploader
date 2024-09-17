@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { useEffect, useRef } from "react"
+import { useRouter } from "next/navigation"
 
 import { handlerFile } from "@/handlers/handlerFile"
 import handlerDragandDrop from "@/handlers/handlerDragandDrop"
@@ -10,6 +11,7 @@ export default function DropArea({ setIsLoading }
     : { setIsLoading: React.Dispatch<React.SetStateAction<boolean>> }) {
     const dropArea = useRef<HTMLDivElement | null>(null)
     const dragAndDrop = useRef<handlerDragandDrop | null>(null)
+    const router = useRouter()
 
     useEffect(() => {
         if (dropArea.current) {
@@ -24,7 +26,7 @@ export default function DropArea({ setIsLoading }
                 onDragOver={(e) => dragAndDrop.current?.dragover(e)}
                 onDragEnter={(e) => dragAndDrop.current?.dragenter(e)}
                 onDragLeave={(e) => dragAndDrop.current?.dragleave(e)}
-                onDrop={(e) => dragAndDrop.current?.drop(e, setIsLoading)}
+                onDrop={(e) => dragAndDrop.current?.drop(e, setIsLoading, router)}
             >
                 <Image
                     src="/exit.svg"
@@ -37,7 +39,7 @@ export default function DropArea({ setIsLoading }
                 </p>
                 <p className="mt-2 text-xs font-light">JPG, PNG or GIF - Max file size 2MB</p>
                 <input id="file" type="file" accept="image/*"
-                    onChange={(e) => handlerFile(e, setIsLoading)}
+                    onChange={(e) => handlerFile(e, setIsLoading, router)}
                     className="hidden" />
             </div>
         </div >

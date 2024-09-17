@@ -1,11 +1,14 @@
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+
 const handlerFile = (event: React.ChangeEvent<HTMLInputElement>,
-    isLoading: React.Dispatch<React.SetStateAction<boolean>>) => {
+    isLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    router: AppRouterInstance) => {
     const selectedFiles = event.target.files;
 
     isLoading(true)
     try {
         selectedFiles &&
-            uploadFile(selectedFiles[0], isLoading);
+            uploadFile(selectedFiles[0], isLoading, router);
     } catch (error) {
         console.error("Error reading file:", error);
         isLoading(false)
@@ -32,7 +35,8 @@ const validationFile = (file: File,
 }
 
 const uploadFile = async (file: File,
-    isLoading: React.Dispatch<React.SetStateAction<boolean>>)
+    isLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    router: AppRouterInstance)
     : Promise<void | null> => {
 
     if (!validationFile(file, isLoading)) return
@@ -52,7 +56,7 @@ const uploadFile = async (file: File,
                 .then((response) => response.json())
                 .then((data) => {
                     isLoading(false)
-                    window.location.href = `/${data.id}`
+                    router.push(`/${data.id}`)
                 }).catch((error) => {
                     console.error("Error:", error);
                     isLoading(false)
