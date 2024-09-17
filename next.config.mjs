@@ -3,8 +3,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        port: "3001",
-        hostname: "localhost",
+        port: "",
+        hostname: "backend-image-upload-59qx.onrender.com",
         pathname: "/uploads/**",
       },
       {
