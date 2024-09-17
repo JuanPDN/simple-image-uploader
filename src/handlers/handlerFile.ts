@@ -36,9 +36,11 @@ const uploadFile = async (file: File,
     : Promise<void | null> => {
 
     if (!validationFile(file, isLoading)) return
+
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+
     try {
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(file);
         fileReader.onload = () => {
             const formData = new FormData()
             formData.append("file", file)
@@ -51,10 +53,14 @@ const uploadFile = async (file: File,
                 .then((data) => {
                     isLoading(false)
                     window.location.href = `/${data.id}`
+                }).catch((error) => {
+                    console.error("Error:", error);
+                    isLoading(false)
                 })
         };
 
     } catch (error) {
+        isLoading(false)
         return console.error("Error reading file:", error);
     }
 }
