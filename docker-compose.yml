@@ -1,6 +1,0 @@
-services:
-  backend-image-upload:
-    container_name: backend
-    image: ghcr.io/juanpdn/backend-image-upload:latest
-    ports:
-      - 3001:3001
