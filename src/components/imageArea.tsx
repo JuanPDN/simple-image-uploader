@@ -10,7 +10,7 @@ export default async function ImageArea({ id }: { id: number }) {
             {file?.name ?
                 <Image
                     className="rounded-lg h-[322px] w-[524px]"
-                    src={file?.path || `http://localhost:3001/${file.path}`}
+                    src={`http://localhost:3001/${file.path}`}
                     alt={file.name}
                     width={524}
                     height={322}
